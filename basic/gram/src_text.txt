@@ -1,0 +1,4 @@
+Hello Kitty
+测试文件复制和写入
+测试
+testing...
