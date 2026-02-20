@@ -22,8 +22,8 @@ def thread_body():
 # Invocation part
 t1 = threading.Thread(target=thread_body)
 t2 = threading.Thread(target=thread_body, name = 'my_thread')
-# t1.start()
-# t2.start()
+t1.start()
+t2.start()
 
 # (Recommend) Method2: Inherit threading.Thread parent class
 print('=====Method 2:Inherit threading class=====')
@@ -41,8 +41,8 @@ class MySmallThread(threading.Thread):
 # Invocation part
 t1 = MySmallThread()
 t2 = MySmallThread(name='my_thread')
-# t1.start()
-# t2.start()
+t1.start()
+t2.start()
 
 # Thread join and wait
 print('=====Thread join and wait demo=====')
@@ -58,8 +58,8 @@ def thread_body():
 
 print('Main thread started...')
 t1 = threading.Thread(target=thread_body)
-# t1.start()
-# t1.join()
+t1.start()
+t1.join()
 print('Value: {0}'.format(value))
 print('Main thread continue executing...')
 
