@@ -76,3 +76,70 @@ print(replace_text)
 
 split_text = re.split(pt, text, maxsplit=1)
 print(split_text)
+
+# Inner functions and constant variables
+import builtins
+print(dir(builtins))
+print(abs(-10))
+print(abs(10))
+
+print(sum([1,2,3]))
+print(sum((1,2,3)))
+print(min(1,5,4))
+print(max(1,5,4))
+print(min(-8, 5, key=abs))
+print(max(-8, 5, key=abs))
+
+li = [1,2,3]
+li2 = ['a', 'b']
+print(zip(li, li2))
+
+for i in zip(li, li2):
+    print(i, type(i))
+# Result:
+# (1, 'a') <class 'tuple'>
+# (2, 'b') <class 'tuple'>
+
+# Convert to List
+print(list(zip(li, li2)))
+
+# Mapping function:map(func, iter1), execute func for each element of the List object
+# def func(x):
+#     return x * 5
+func = lambda x : x * 5
+mp = map(func, li)
+print(mp)
+# for i in mp:
+#     print(i)
+
+print(list(mp))
+
+# Reduce usage - accumulate value result: reduce(func, sequence)
+from functools import reduce
+def add(x, y):
+    return x + 2 * y
+res = reduce(add, li)
+print(res)
+
+# Split package data
+tua = (1,2,3,4)
+print(tua)
+a,b,c,d = tua
+print(a,b,c,d)
+
+# b is *args
+a, *b = tua
+print(a,b)
+c,d,e = b
+print(c,d,e)
+c,*d = b
+print(c,d)
+
+def funa(a,b,*args):
+    print(a,b)
+    print(args, type(args))
+
+funa(1,2,3,4,5,6,7)
+
+args = (1,2,3,4,5,6,7)
+funa(*args)

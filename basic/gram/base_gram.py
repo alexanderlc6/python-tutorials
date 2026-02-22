@@ -295,3 +295,127 @@ print(list(d.values()))
 #     in2.pack()
 #     in3.pack()
 #     print(f"Input result:{in1},{in2},{in3}")
+
+# Recursive
+# Origin method
+def get_sum():
+    s = 0
+    for i in range(1, 101):
+        s += i;
+    print(s)
+get_sum()
+
+# Recursive method
+def get_sum_recursive(n):
+    if n == 1:
+        return 1
+    return n + get_sum_recursive(n - 1)
+print(get_sum_recursive(100))
+
+# Fibernacci  sequence
+# 1,1,2,3,5,8,13..., n = (n - 2) + (n - 1)
+def funa(n):
+    if n <= 1:
+        return n
+    return funa(n - 2) + funa(n - 1)
+print(funa(6))
+
+# Closure: function cascade definitions
+def outer():
+    n = 10
+    def inner():
+        print(n)
+    return inner
+
+# function memory address
+print(outer())
+
+outer()()
+ot = outer()
+ot()
+
+def outer(m):
+    n = 10
+    def inner(t):
+        print('Calc result:', m + n + t)
+    return inner
+print(outer(20))
+ot = outer(20)
+ot(50)
+
+def outer(m):
+    print('Outer() value:', m)
+    def inner(n):
+        print('Inner() value:', n)
+        return m + n
+    return inner
+ot = outer(10)
+print(ot)
+
+# Closure variable will reserve in memory
+print(ot(20))
+print(ot(40))
+
+# Decorator: define function ref param in a function
+# ====Origin method====
+def test(fn):
+    print('abc')
+    fn()
+
+def func():
+    print('test...')
+test(func)
+
+# Decorate function definition method
+# Function to be decorated
+def send():
+    print('Sending main msg...')
+def pay():
+    print('Paying...')
+
+# Decorator function
+def outer(fn):
+    def inner():
+        print(f'Login...')
+        fn()
+    return inner
+
+print(outer(send))
+outer(send)()
+# Or
+ot = outer(send)
+ot()
+ot = outer(pay)
+ot()
+
+def outer(fn):
+    def inner(name):
+        print(f'Login whth name:{name}...')
+        fn(name)
+    return inner
+
+# Grammar declaration method(Decorator reference, function to be decorated)
+@outer
+def send(name):
+    print('Sending other messages...')
+send('Alex')
+
+print(outer(send))
+ot = outer(send)
+ot('David')
+
+def var_func(*args, **kwargs):
+    print(args)
+    print(kwargs)
+var_func(name = 'Sally')
+
+def outer(fn):
+    def inner(*args, **kwargs):
+        print('Login...')
+        fn(*args, **kwargs)
+    return inner
+# print(outer('test'))
+# outer('test')()
+
+print(outer(var_func))
+outer(var_func)('Alex','Jack', name='Lisa', age = 19)
