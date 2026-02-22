@@ -419,3 +419,20 @@ def outer(fn):
 
 print(outer(var_func))
 outer(var_func)('Alex','Jack', name='Lisa', age = 19)
+
+# Multiple decorators
+def deco1(fn):
+    def inner():
+        return "hello " + fn() + " world"
+    return inner
+def deco2(fn):
+    def inner():
+        return "nice " + fn() + " great"
+    return inner
+
+@deco1
+@deco2
+def be_deco_func():
+    return "Being decorated here..."
+
+print(be_deco_func())
