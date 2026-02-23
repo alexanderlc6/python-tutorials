@@ -38,5 +38,6 @@ def calcNew(opr):
         return lambda a, b:(a - b)
 f1 = calc('+')
 f2 = calc('-')
+print(calc('+')(12,10))
 print("10 + 5 = {0}".format(f1(10, 5)))
 print("10 - 5 = {0}".format(f2(10, 5)))

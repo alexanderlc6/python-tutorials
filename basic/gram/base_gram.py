@@ -436,3 +436,119 @@ def be_deco_func():
     return "Being decorated here..."
 
 print(be_deco_func())
+
+# ======Iterable usage=======
+from collections.abc import Iterable
+print(isinstance('123', Iterable))
+li = [1,2,3,4,5]
+# iter() will call __iter()__ as result
+li2 = iter(li)
+print(next(li2))
+print(next(li2))
+print(next(li2))
+
+li2 = li.__iter__()
+# Contains __next()__
+print(dir(li2))
+print(li2.__next__())
+print(li2.__next__())
+print(li2.__next__())
+
+# ======Iterator usage=======
+from collections.abc import Iterator
+name = 'Alex Good'
+print(isinstance(name, Iterable))   #True
+# Iterable object may not be the Iterator object(should both support __next()__ and __iter()__ method).
+print(isinstance(name, Iterator))   #False
+
+name2 = iter(name)
+print(isinstance(name2, Iterable))   #True
+print(isinstance(name2, Iterator))   #True
+
+# Customize Iterator
+class MyTest(object):
+    def __init__(self):
+        self.num = 1
+    def funa(self):
+        print(self.num)
+        self.num += 1
+
+te = MyTest()
+print(te)
+# Increase by 1
+te.funa()
+te.funa()
+te.funa()
+te.funa()
+te.funa()
+
+for i in range(5):
+    te.funa()
+
+class MyIterator( object):
+    def __init__(self):
+        self.num = 0
+    def __iter__(self):
+        return self
+    def __next__(self):
+        if self.num == 10:
+            raise StopIteration('Stop iterate, data is empty!')
+        self.num += 1
+        return self.num
+
+mi = MyIterator()
+print(mi)
+print(next(mi))
+
+for i in mi:
+    print(i)
+
+# ======Generator usage=======
+for i in range(5):
+    print(i * 5)
+
+# print([i * 5 for i in range(5)])
+gen = (i * 5 for i in range(5))
+print(gen)
+print(next(gen))
+print(next(gen))
+print(next(gen))
+
+# Raw method
+# li = []
+# def test_gen():
+#     global li
+#     li.append('a')
+#     print('li:', li)
+# test_gen()
+# test_gen()
+
+# Generator method
+def gen():
+    print('Start gen...')
+    yield 'a'
+    yield 'b'
+    yield 'c'
+gen1 = gen()
+print(gen1)
+print(next(gen1))
+print(next(gen1))
+print(next(gen1))
+
+def gen2(n):
+    li =[]
+    # for i in range(n):
+    #     li.append(i)
+    a = 0
+    while a < n:
+        li.append(a)
+        yield a
+        a += 1
+    print('li:', li)
+gen2(4)
+
+for i in gen2(5):
+    print(i)
+
+
+

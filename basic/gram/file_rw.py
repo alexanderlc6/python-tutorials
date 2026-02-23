@@ -50,3 +50,20 @@ with open(f_bn_name, 'rb') as f:
     with open(copy_f_name, 'wb') as copy_f:
         copy_f.write(b)
         print('Binary file copy succeed!')
+
+# Relocate start position to read from index(whence) after write
+f = open('src_text.txt', 'w+', encoding='utf-8')
+f.write('测试append text...')
+f.seek(0, 0)
+print('------File read:', f.read())
+f.close()
+
+import os
+os.rename('test.txt', 'test-new.txt')
+# os.remove('test-new.txt')
+# os.mkdir('tmp_files')
+# os.rmdir('tmp_files')
+# Get current directory
+print(os.getcwd())
+print(os.listdir())
+print(os.listdir('../'))

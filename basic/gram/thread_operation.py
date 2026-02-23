@@ -72,7 +72,7 @@ def work_thread_body():
     while is_running:
         print('Work thread executing...')
         time.sleep(5)
-    print('Work thread completed.')
+    print('Work thread stopped.')
 
 def control_thread_body():
     global is_running
