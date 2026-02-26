@@ -129,3 +129,61 @@ print(res.group())
 # Group match in ()
 res = re.match('\w*@(126|163|qq).com', 'ab@126.com')
 print(res.group())
+
+# Match specific num pointed string(1 stands for html)
+res = re.match(r'<(\w*)>\w*</\1>', '<html>login</html>')
+res = re.match(r'<(\w*)><(\w*)>.*</\2></\1>', '<html><body>login</body></html>')
+print(res.group())
+
+# Group with alias
+res = re.match(r'<(?P<L1>\w*)><(?P<L2>\w*)>.*</(?P=L2)></(?P=L1)>', '<html><body>login</body></html>')
+print(res.group())
+
+# Match web page URL(www,.com,.cn,.org)
+li = ['www.baidu.com','www.py.org', 'http.jd.cn', 'www.abc.en','www.dt.cn']
+res = re.match(r'www(\.)\w*\1(com|cn|org)','www.baidu.com')
+print(res.group())
+
+for i in li:
+    res = re.match(r'www(\.)\w*\1(com|cn|org)', i)
+    if res:
+        print(res.group())
+    else:
+        print(f'Web page url {i} is error format!')
+
+# search()
+res = re.search("\d", 'pyth2onth')
+print(res.group())
+
+# findall()
+res = re.findall("\d", 'pyt3233h2onth')
+# res is list type
+print(res)
+
+# sub()
+res = re.sub("Alex", 'aa', 'helloAlexAlex', 1)
+print(res)
+
+res = re.sub('\d', '2', 'The 30 day of the month', 1)
+print(res)
+
+# split()
+res = re.split(',', 'hello,Alex,2323,5ggg', 1)
+print(res)
+
+# Greed match
+res = re.match('et*', 'etttt...')
+print(res.group())
+
+# Non-greed match
+res = re.match('et?', 'etttt...')
+print(res.group())
+
+res = re.match('m+?', 'mmmmm')
+res = re.match('m{3,4}?', 'mmmmm')
+print(res.group())
+
+# Origin raw string(\\ replace for \)
+res = re.match(r'www\.baidu\.com', 'www.baidu.com')
+res = re.match(r'\\\\\\', r'\\\game')
+print(res.group())
