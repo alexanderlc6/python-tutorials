@@ -1,4 +1,6 @@
 import math
+import time
+
 print(math.ceil(2.3))
 print(math.floor(2.3))
 print(math.ceil(-2.3))
@@ -143,3 +145,59 @@ funa(1,2,3,4,5,6,7)
 
 args = (1,2,3,4,5,6,7)
 funa(*args)
+
+# os module
+import os
+print(os.name)
+print(os.getenv('PATH'))
+print(type(os.path.split('/Users/alexlc/Products/src/AI/python-tutorials/basic/gram/lib_usages.py')))
+print(os.path.dirname('/Users/alexlc/Products/src/AI/python-tutorials/basic/gram/lib_usages.py'))
+print(os.path.basename('/Users/alexlc/Products/src/AI/python-tutorials/basic/gram/lib_usages.py'))
+print(os.path.exists('/Users/alexlc/Products/src/AI/python-tutorials/basic/gram'))
+print(os.path.isdir('/Users/alexlc/Products/src/AI/python-tutorials/basic/gram'))
+print(os.path.isfile('/Users/alexlc/Products/src/AI/python-tutorials/basic/gram/lib_usages.py'))
+print(os.path.abspath('lib_usages.py'))
+print(os.path.isabs('lib_usages.py'))
+
+# sys module
+import sys
+print(sys.getdefaultencoding())
+# Current work dir
+print(sys.path[0])
+print(sys.platform)
+# Get python interpreter version
+print(sys.version)
+
+# time module
+# Delay seconds
+time.sleep(1)
+# Timestamp, Formatted time
+print(time.time())
+t = time.localtime()
+print(type(t))
+print(t.tm_wday)
+print(time.asctime(t))
+print(time.ctime())
+t = time.time()
+print(time.ctime(t))
+
+# Time conversion(struct_time <=> time)
+print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
+print(time.strptime('2024-02-19 15:56:01', '%Y-%m-%d %H:%M:%S'))
+
+# logging module
+import logging
+# Log level: DEBUG, INFO, WARNING(default log level), ERROR, CRITICAL
+logging.basicConfig(filename='log.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+logging.debug('Debuging...')
+logging.info('Info...')
+logging.warning('Warning...')
+logging.error('Error occurring...')
+logging.critical('Critical error occurring...')
+
+# random module
+import random
+print(random.random())
+print(random.uniform(1,3))
+print(random.randint(1,4))
+print(random.randrange(2,6, 2))
