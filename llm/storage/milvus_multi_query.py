@@ -1,5 +1,5 @@
 # Reference article: https://blog.csdn.net/qkh1234567/article/details/141160642
-from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType, MilvusClient, utility
+from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType, MilvusClient, utility, AnnSearchRequest, WeightedRanker
 import random
 
 connections.connect(host="127.0.0.1", port="19530")
@@ -56,3 +56,46 @@ for _ in range(1000):
 coll.insert(entities)
 print(f"Data inserted { len(entities)} records.")
 coll.load()
+
+
+# ===== ANN Search demo ======
+# Create multi search request for field [filmVector]
+query_filmVector = [[0.8896863042430693, 0.370613100114602, 0.23779315077113428, 0.38227915951132996, 0.5997064603128835]]
+
+search_params_1 = {
+    'data': query_filmVector,
+    'anns_field': 'filmVector',
+    'param': {
+        'metric_type': 'L2',
+        'params': {
+            'nprobe': 10
+        }
+    },
+    'limit': 2
+}
+
+request_1 = AnnSearchRequest(**search_params_1)
+
+query_posterVector = [[0.02550758562349764, 0.006085637357292062, 0.5325251250159071, 0.7676432650114147, 0.5521074424751443]]
+
+search_params_2 = {
+    'data': query_posterVector,
+    'anns_field': 'posterVector',
+    'param': {
+        'metric_type': 'L2',
+        'params': {
+            'nprobe': 10
+        }
+    },
+    'limit': 2
+}
+request_2 = AnnSearchRequest(**search_params_2)
+reqs = [request_1, request_2]
+
+# Config rank strategy
+# Given text search weight 0.8 and image search weight 0.2
+rerank = WeightedRanker(0.8, 0.2)
+
+coll.load()
+res = coll.hybrid_search(reqs, rerank, limit = 2)
+print(res)
