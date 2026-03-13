@@ -1,7 +1,5 @@
 from dotenv import load_dotenv
 
-from langchain_demos.self_ask_demo import agent_executor
-
 load_dotenv()
 
 from langchain_openai import ChatOpenAI
@@ -12,7 +10,7 @@ from langchain_community.agent_toolkits.load_tools import load_tools
 tools = load_tools(['serpapi', 'llm-math'], llm=llm)
 
 # Config prompt template
-from langchain.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate
 template = (
     '''
     '尽量用中文回答如下问题，如果能力不够可以使用如下工具:\n\n'
