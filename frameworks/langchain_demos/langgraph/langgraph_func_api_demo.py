@@ -24,8 +24,9 @@ def workflow(topic:str) -> dict:
         'is_approved': is_approved
     }
 
+# Simulate for long-running tasks like API calls and may be interrupted for human-in-the-loop
 def my_workflow(some_input: dict) -> int:
-    # e.g.involve long-running tasks like API calls and may be interrupted for human-in-the-loop
+    ...
     return 0
 
 thread_id = str(uuid.uuid4())
