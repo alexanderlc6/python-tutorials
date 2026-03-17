@@ -1,12 +1,18 @@
+import dataclasses
+import uuid
 from typing import Any, TypedDict
 
+from langchain_core.stores import InMemoryStore
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.constants import START, END
 from langgraph.func import entrypoint, task
 from langgraph.graph import StateGraph, MessagesState
+from langgraph.runtime import Runtime
 from sqlalchemy.sql.annotation import Annotated
 from operator import add
+from dataclasses import dataclass
 
+# Add short-term memory
 checkpointer = InMemorySaver()
 
 @entrypoint(checkpointer=checkpointer)
@@ -51,15 +57,40 @@ class StateObj(TypedDict):
 def plain_node1(state: StateObj):
     return state
 
-graph = StateGraph(MessagesState)
-graph.add_node(plain_node1)
-graph.add_edge(START, 'plain_node1')
-graph.add_edge('plain_node1', END)
-graph = graph.compile(checkpointer=checkpointer)
+# Add long-term memory
+store = InMemoryStore()
+
+@dataclass
+class Context:
+    user_id: str
+
+async def call_model(state: MessagesState, runtime: Runtime[Context]):
+    user_id = runtime.context.user_id
+    namespace = (user_id, 'memories')
+
+    # Search for relevant memories
+    memories = await runtime.store.asearch(namespace, query=store['messages'][-1].content, limit=3)
+    info = '\n'.join([d.value['data'] for d in memories])
+
+    # ... Use memories in model call
+    # Store a new memory
+    await runtime.store.aput(
+        namespace, str(uuid.uuid4()), {'data': 'User prefers dark mode'}
+    )
+
+builder = StateGraph(MessagesState, context_schema=Context)
+builder.add_node(call_model)
+builder.add_edge(START, 'call_model')
+# builder.add_edge('call_model', END)
+graph = builder.compile(checkpointer=checkpointer, store=store)
 # {'messages': [HumanMessage(content='hi! i am Bob', additional_kwargs={}, response_metadata={}, id='531167bf-e5ef-46ca-9af9-ee752d6f1abf')]}
+
+# Pass context at invocation time
 print(graph.invoke(
-    {"messages": [{"role": "user", "content": "hi! i am Bob"}]},
-    config
+    {"messages": [{"role": "user", "content": "Hi! I am Bob"}]},
+    config,
+    context = Context(user_id='123')
 ))
+
 
 
