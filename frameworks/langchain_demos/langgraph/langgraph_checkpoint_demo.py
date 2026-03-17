@@ -1,4 +1,3 @@
-from langgraph.checkpoint.postgres import PostgresSaver
 from langgraph.checkpoint.redis import RedisSaver
 from langgraph.graph import StateGraph, MessagesState, START, END
 from langchain_openai import ChatOpenAI
