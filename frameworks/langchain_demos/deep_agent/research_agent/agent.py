@@ -9,13 +9,13 @@ from deepagents import create_deep_agent
 from langchain_core.messages import SystemMessage
 from langchain_openai import ChatOpenAI
 
-from research_agent.prompts import (
+from prompts import (
     RESEARCHER_INSTRUCTIONS,
     RESEARCH_WORKFLOW_INSTRUCTIONS,
     SUBAGENT_DELEGATION_INSTRUCTIONS
 )
 
-from research_agent.call_tools import tavily_search, think_tool
+from call_tools import tavily_search, think_tool
 
 # Limits
 max_concurrent_research_units = 3
