@@ -1,6 +1,6 @@
 import asyncio
 
-from langchain.embeddings import init_embeddings
+from langchain_community.embeddings import DashScopeEmbeddings
 from langgraph.constants import START
 from langgraph.graph import MessagesState, StateGraph
 from langgraph.runtime import Runtime
@@ -11,9 +11,8 @@ import os
 model = ChatOpenAI(api_key=os.getenv('DASHSCOPE_API_KEY'),model='qwen-max',
                    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1", temperature=0)
 
-embeddings = init_embeddings('text-embedding-v3',
-                             api_key=os.getenv('DASHSCOPE_API_KEY'),
-                             base_url="https://dashscope.aliyuncs.com/compatible-mode/v1")
+embeddings = DashScopeEmbeddings(model='text-embedding-v3',
+                             dashscope_api_key=os.getenv('DASHSCOPE_API_KEY'))
 store =InMemoryStore(
     index={
         'embed': embeddings,
