@@ -23,9 +23,8 @@ print(docs[0].page_content[:500])
 
 splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
 
-all_chunks = []
-for doc in docs:
-    all_chunks.append(splitter.split_text(doc[0].page_content))
+chunks = splitter.split_documents(documents=docs)
+print(f'Total chunks: {len(chunks)}')
 
 # Vector store of ElasticSearch
 from langchain_elasticsearch import ElasticsearchStore
@@ -34,7 +33,7 @@ vector_store = ElasticsearchStore(
     embedding=embeddings,
     es_url='http://localhost:9200'
 )
-vector_store.add_documents(documents=all_chunks)
+vector_store.add_documents(documents=chunks)
 
 # Vector store of Milvus
 from langchain_milvus import Milvus
@@ -44,7 +43,7 @@ vector_store = Milvus(
     connection_args={'uri': URI},
     index_params={'index_type': 'FLAT', 'metric_type': 'L2'}
 )
-vector_store.add_documents(documents=all_chunks)
+vector_store.add_documents(documents=chunks)
 
 # Vector store of MongoDB
 from langchain_mongodb import MongoDBAtlasVectorSearch
@@ -65,6 +64,6 @@ vector_store = MongoDBAtlasVectorSearch(
     text_key='text',
     embedding_key='embedding'
 )
-vector_store.add_documents(documents=all_chunks)
+vector_store.add_documents(documents=chunks)
 
 result_with_score = vector_store.similarity_search_with_score('What is the difference between LLM and GPT?', k = 3)
