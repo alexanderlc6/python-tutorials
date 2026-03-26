@@ -3,7 +3,7 @@ from typing import Literal, Any
 from langchain.agents import create_agent, AgentState
 from langchain.agents.middleware import after_agent, HumanInTheLoopMiddleware
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessageChunk, AnyMessage, AIMessage, ToolMessage
-from langchain_core.runnables import Runnable
+from langchain_core.runnables import Runnable, RunnableConfig
 from langchain_openai import ChatOpenAI
 import os
 
@@ -226,7 +226,10 @@ def _get_interrupt_decisions(interrupt: Interrupt) -> list[dict]:
         for request in interrupt.value['action_requests']
     ]
 
-config = {'configurable': {'thread_id': '123'}}
+config = RunnableConfig(configurable= {
+        'thread_id': '123',
+        'checkpoint_ns': 'weather_agent'
+    })
 
 # for chunk in model.stream('Why do parrots have colorful feathers?'):
 #     reasoning_steps = [r for r in chunk.content_blocks if r['type'] == 'reasoning']
@@ -238,13 +241,14 @@ agent: Runnable = create_agent(
         safety_guardrail,
         # Streaming with human-in-the-loop
         HumanInTheLoopMiddleware(interrupt_on={'get_weather': True})],
-    checkpointer = checkpointer
+     # checkpointer = checkpointer
 )
 
 for chunk in agent.stream(
   {'messages': [{'role':'user', 'content': 'Can you look up the weather in Boston and San Francisco?'}]},
         stream_mode=['messages', 'updates'],
-        version='v2'
+        version='v2',
+        config=config
 ):
     if chunk['type'] == 'messages':
         token, metadata = chunk['data']
