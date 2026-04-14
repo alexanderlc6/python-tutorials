@@ -131,3 +131,134 @@ print(df.nlargest(1, columns=['总消费金额']))
 print(df['总消费金额'].mean())
 
 print(df[df['商品类别'] == '电子产品']['购买数量'].sum())
+
+df = pd.read_csv('sleep.csv')
+df['age'] = df['age'].astype('int16')
+print(df.dtypes)
+df['gender'] = df['gender'].astype('category')
+print(df.gender)
+df['is_male'] = df['gender'].map({'Female': True, 'Male': False})
+print(df.is_male)
+
+# Example4:
+data ={
+    'ID': [1,2],
+    'name': ['alice smith', 'bob smith'],
+    'Math': [90,85],
+    'English': [88,92],
+    'Science': [95,89]
+}
+df = pd.DataFrame(data)
+print(df)
+#    ID   name  Math  English  Science
+# 0   1  alice    90       88       95
+# 1   2    bob    85       92       89
+# df.T
+# Convert broad table to long table
+df2 = pd.melt(df, id_vars=['ID', 'name'], var_name='Subject', value_name='Score')
+df2.sort_values('name')
+print(df2)
+# Convert long table to broad table
+df3 = pd.pivot(df2, index=['ID','name'], columns='Subject', values='Score')
+print(df3)
+# Subject   English  Math  Science
+# ID name
+# 1  alice       88    90       95
+# 2  bob         92    85       89
+# print(df3)
+# df3 = pd.pivot(df2, index=['ID','name'], columns='Score', values='Subject')
+# Score       85       88       89    90       92       95
+# ID name
+# 1  alice   NaN  English      NaN  Math      NaN  Science
+# 2  bob    Math      NaN  Science   NaN  English      NaN
+
+# Split columns
+df[['first','last']] = df['name'].str.split(' ', expand=True)
+print(df)
+#    ID         name  Math  English  Science  first   last
+# 0   1  alice smith    90       88       95  alice  smith
+# 1   2    bob smith    85       92       89    bob  smith
+df = pd.read_csv('sleep.csv')
+print(df.head())
+
+df = df[['person_id', 'blood_pressure']]
+print(df)
+# blood_pressure: 124/89
+df[['high', 'low']] = df['blood_pressure'].str.split('/', expand=True)
+print(df)
+# Default type of new column is [object]
+df['high'] = df['high'].astype('int64')
+df['low'] = df['low'].astype('int64')
+print(df.info())
+
+# Data Box sealing: pd.cut(x, bins, labels)
+df = pd.read_csv('employees.csv')
+print(df.head(10))
+df1 = df.head(10)[['employee_id', 'salary']]
+print(df1)
+
+df2 = pd.cut(df1['salary'], bins=2).value_counts()
+# Split scopes: 4180.2 - 14100.0 - 24000.0
+# 0    (14100.0, 24000.0]
+# 1    (14100.0, 24000.0]
+# 2    (14100.0, 24000.0]
+# 3     (4180.2, 14100.0]
+# 4     (4180.2, 14100.0]
+# 5     (4180.2, 14100.0]
+# 6     (4180.2, 14100.0]
+# 7     (4180.2, 14100.0]
+# 8     (4180.2, 14100.0]
+# 9     (4180.2, 14100.0]
+
+print(df2)
+# Use value_counts() to classify result
+# (4180.2, 14100.0]     7
+# (14100.0, 24000.0]    3
+df1['SalaryScope'] = pd.cut(df1['salary'], bins=[0, 10000, 20000, 30000], labels=['Low', 'Medium', 'High']) # .value_counts()
+print(df1)
+# salary
+# (0, 10000]        6
+# (10000, 20000]    3
+# (20000, 30000]    1
+
+df5= pd.qcut(df1['salary'], 3).value_counts()
+print(df5)
+# salary
+# (12000.0, 24000.0]    4
+# (4199.999, 6000.0]    3
+# (6000.0, 12000.0]     3
+
+df = pd.read_csv('sleep.csv')
+df1 = df.head(10)[['person_id', 'sleep_quality', 'gender']]
+print(df1)
+df1['SleepQuality'] = pd.cut(df1['sleep_quality'], bins=3, labels=['Bad', 'Medium', 'Good'])
+print(df1)
+print(df1['SleepQuality'].value_counts())
+# SleepQuality
+# Medium    5
+# Bad       3
+# Good      2
+
+# String -> classify -> statistics
+# Value -> DataBoxing -> statistics
+df['gender'] = df['gender'].astype('category')
+print(df['gender'].value_counts())
+# [category] type
+print(df1['SleepQuality'].dtypes)
+
+# df.rename(),df.set_index(),df.reset_index()
+df = pd.DataFrame(
+    {
+        'name': ['Tom', 'Jerry', 'Jim', 'James'],
+        'age': [18,19,18,20],
+        'gender': ['Male', 'Female', 'Male', 'Male'],
+    })
+df.set_index('name', inplace=True)
+print(df)
+df.reset_index(inplace=True)
+print(df)
+df.rename(columns={'age': 'AGE'}, index={0:4}, inplace=True)
+print(df)
+df.index=[1,2,3,4]
+df.columns=['Name', 'Age', 'Gender']
+print(df)

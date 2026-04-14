@@ -28,6 +28,7 @@ try:
     storage_context = StorageContext.from_defaults(persist_dir='./storage/B')
     B_index = load_index_from_storage(storage_context)
     index_loaded = True
+
 except:
     index_loaded = False
 

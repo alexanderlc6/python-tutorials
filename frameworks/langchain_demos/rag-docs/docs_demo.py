@@ -152,7 +152,7 @@ if pages:
 
 # print('Total pages:', len(pages))
 # print(all_pages[0].page_content[:100]) # First 100 chars of the first page
-# Integration process and testingv1.24
+# Integration process and testing v1.24
 # 31
 # 6.6.4.1 Testing
 # The MDAPI module is responsible for handl
@@ -205,8 +205,7 @@ pdf_doc = pdf_loader.load()
 # pprint.pp(pdf_doc[0].metadata[:1000])
 
 # Parse images in pdf document
-from langchain_community.document_loaders.parsers import RapidOCRBlobParser, TesseractBlobParser, LLMImageBlobParser, \
-    PyPDFParser
+from langchain_community.document_loaders.parsers import LLMImageBlobParser, PyPDFParser
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 

@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-from pyspark._typing import F
+from pyspark.sql import functions as F
 from pyspark.shell import spark
 # Use spark session instead of pyspark.shell
 from pyspark.sql import SparkSession
@@ -25,6 +25,8 @@ else:
 sparkObj = SparkSession.builder.appName("test").getOrCreate()
 rdd = sparkObj.sparkContext.textFile('test1.json')
 result = rdd.flatMap(lambda line: line.split(' ')).map(lambda word:(word, 1)).reduceByKey(lambda a,b: a+b).collect()
-
 df = spark.read.json('test1.json')
-df.filter(df.age > 18).groupby('dept').agg(F.sum('salary').alias('total_salary')).orderBy(F.desc('Total')).show()
+df.filter(df.age > 18).groupby('dept').agg(F.sum('salary').alias('total_salary')).orderBy(F.desc('total_salary')).show()
+
+# df = sparkObj.read.json('test1.json')
+# df.filter(df.age > 16).groupby('dept').agg(F.sum('salary').alias('total_salary')).orderBy(F.desc('total_salary')).show()
