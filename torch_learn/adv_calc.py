@@ -1,10 +1,12 @@
 import torch
+
 rd = torch.rand(2,1,1) + torch.rand(3)
 print(rd)
 
 a = torch.rand(2,3)
 b = torch.rand(3)   # or rand(1) --> right-align rule
 c = a + b
+print(c)
 
 print('====Special case:====')
 a = torch.rand(2,1,1,3)

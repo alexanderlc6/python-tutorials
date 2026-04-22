@@ -7,6 +7,14 @@ a = torch.Tensor(2, 3)
 print(a)
 print(a.type())
 
+# Type conversion example
+int_tensor = torch.tensor([1,2,3], dtype=torch.int64)
+conv_float_tensor = int_tensor.float()
+float_tensor = torch.tensor([1.0,2.0,3.0], dtype=torch.float32)
+mixed_tensor = float_tensor + int_tensor
+print(f'Mixed type:{mixed_tensor.dtype}')
+
+
 # Some tensor definition types
 a = torch.ones(2,2)
 a = torch.eye(2,2)
@@ -35,6 +43,7 @@ print(a.type())
 
 # Uniform distribution tensor
 a = torch.Tensor(2, 2).uniform_(-1, 1)
+print('====Uniform distribution tensor====')
 print(a)
 print(a.type())
 
@@ -55,8 +64,9 @@ print(e.type())
 
 #### Use numpy to define tensor ####
 import numpy as np
-a = np.array([[1,2], [2,3]])
-print(a)
+np_array = np.array([[1,2], [2,3]])
+tensor_from_numpy = torch.from_numpy(np_array)
+print(tensor_from_numpy)
 f = np.ones_like(torch.Tensor(2,3))
 print(f)
 
