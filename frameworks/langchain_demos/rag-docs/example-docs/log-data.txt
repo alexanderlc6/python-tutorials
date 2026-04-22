@@ -1,0 +1,79 @@
+#######               #######                     #                         
+#        ####  #    # #        ####   ####       # #   #####   ####  #    # 
+#       #    #  #  #  #       #      #          #   #  #    # #    # #    # 
+#####   #    #   ##   #####    ####   ####     #     # #    # #      ###### 
+#       #    #   ##   #            #      #    ####### #####  #      #    # 
+#       #    #  #  #  #       #    # #    #    #     # #   #  #    # #    # 
+#        ####  #    # #######  ####   ####     #     # #    #  ####  #    # 
+                                                                            
+
+2026-01-21 10:29:57.914  INFO 7 --- [kground-preinit] o.h.validator.internal.util.Version      : HV000001: Hibernate Validator 6.2.0.Final
+2026-01-21 10:29:57.920  INFO 7 --- [           main] c.f.b.u.biz.FoxessBaasUpmsApplication    : Starting FoxessBaasUpmsApplication using Java 11.0.13 on foxess-baas-upms-0 with PID 7 (/opt/foxess-baas-upms.jar started by root in /opt)
+2026-01-21 10:29:57.923  INFO 7 --- [           main] c.f.b.u.biz.FoxessBaasUpmsApplication    : The following 1 profile is active: "dev"
+2026-01-21 10:29:58.014  INFO 7 --- [           main] c.a.c.n.c.NacosConfigDataLoader          : [Nacos Config] Load config[dataId=foxess-baas-upms-dev.yml, group=DEFAULT_GROUP] success
+2026-01-21 10:29:58.015  INFO 7 --- [           main] c.a.c.n.c.NacosConfigDataLoader          : [Nacos Config] Load config[dataId=application-dev.yml, group=DEFAULT_GROUP] success
+2026-01-21 10:30:00.316  INFO 7 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-01-21 10:30:00.320  INFO 7 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-01-21 10:30:00.353  INFO 7 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
+2026-01-21 10:30:00.879  INFO 7 --- [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=76c828f4-39e3-3e44-8b4e-0348a87fa3a2
+2026-01-21 10:30:01.076  INFO 7 --- [           main] ptablePropertiesBeanFactoryPostProcessor : Post-processing PropertySource instances
+2026-01-21 10:30:01.114  INFO 7 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource configurationProperties [org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource] to AOP Proxy
+2026-01-21 10:30:01.116  INFO 7 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource gateway-properties [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+2026-01-21 10:30:01.117  INFO 7 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource servletConfigInitParams [org.springframework.core.env.PropertySource$StubPropertySource] to EncryptablePropertySourceWrapper
+2026-01-21 10:30:01.117  INFO 7 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource servletContextInitParams [org.springframework.core.env.PropertySource$StubPropertySource] to EncryptablePropertySourceWrapper
+2026-01-21 10:30:01.117  INFO 7 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+2026-01-21 10:30:01.118  INFO 7 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+2026-01-21 10:30:01.118  INFO 7 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+2026-01-21 10:30:01.118  INFO 7 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource cachedrandom [org.springframework.cloud.util.random.CachedRandomPropertySource] to EncryptablePropertySourceWrapper
+2026-01-21 10:30:01.119  INFO 7 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource springCloudClientHostInfo [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+2026-01-21 10:30:01.119  INFO 7 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource DEFAULT_GROUP@foxess-baas-upms-dev.yml [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+2026-01-21 10:30:01.119  INFO 7 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource DEFAULT_GROUP@application-dev.yml [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+2026-01-21 10:30:01.119  INFO 7 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+2026-01-21 10:30:01.120  INFO 7 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource openapi-config.yaml [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+2026-01-21 10:30:01.225  INFO 7 --- [           main] c.u.j.filter.DefaultLazyPropertyFilter   : Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+2026-01-21 10:30:02.118  INFO 7 --- [           main] c.u.j.r.DefaultLazyPropertyResolver      : Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+2026-01-21 10:30:02.124  INFO 7 --- [           main] c.u.j.d.DefaultLazyPropertyDetector      : Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+2026-01-21 10:30:02.320  WARN 7 --- [           main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2026-01-21 10:30:02.351  INFO 7 --- [           main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
+2026-01-21 10:30:02.352  INFO 7 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4335 ms
+2026-01-21 10:30:02.692  INFO 7 --- [           main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2026-01-21 10:30:03.277  INFO 7 --- [           main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2026-01-21 10:30:04.420  INFO 7 --- [           main] c.a.c.sentinel.SentinelWebMvcConfigurer  : [Sentinel Starter] register SentinelWebInterceptor with urlPatterns: [/**].
+2026-01-21 10:30:04.763  INFO 7 --- [           main] o.s.c.openfeign.FeignClientFactoryBean   : For 'foxess-baas-upms' URL not provided. Will try picking an instance via load-balancing.
+2026-01-21 10:30:05.779  WARN 7 --- [           main] c.b.m.core.metadata.TableInfoHelper      : Can not find table primary key in Class: "com.foxess.baas.upms.biz.entity.SysDeptRelation".
+2026-01-21 10:30:05.785  WARN 7 --- [           main] c.f.c.d.datascope.DataScopeSqlInjector   : class com.foxess.baas.upms.biz.entity.SysDeptRelation ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2026-01-21 10:30:06.062  WARN 7 --- [           main] c.b.m.core.metadata.TableInfoHelper      : Can not find table primary key in Class: "com.foxess.baas.upms.biz.entity.SysRoleMenu".
+2026-01-21 10:30:06.063  WARN 7 --- [           main] c.f.c.d.datascope.DataScopeSqlInjector   : class com.foxess.baas.upms.biz.entity.SysRoleMenu ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2026-01-21 10:30:06.327  WARN 7 --- [           main] c.b.m.core.metadata.TableInfoHelper      : Can not find table primary key in Class: "com.foxess.baas.upms.biz.entity.SysRoleApp".
+2026-01-21 10:30:06.328  WARN 7 --- [           main] c.f.c.d.datascope.DataScopeSqlInjector   : class com.foxess.baas.upms.biz.entity.SysRoleApp ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2026-01-21 10:30:06.489  WARN 7 --- [           main] c.b.m.core.metadata.TableInfoHelper      : Can not find table primary key in Class: "com.foxess.baas.upms.biz.entity.SysUserDept".
+2026-01-21 10:30:06.489  WARN 7 --- [           main] c.f.c.d.datascope.DataScopeSqlInjector   : class com.foxess.baas.upms.biz.entity.SysUserDept ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2026-01-21 10:30:06.671  WARN 7 --- [           main] c.b.m.core.metadata.TableInfoHelper      : Can not find table primary key in Class: "com.foxess.baas.upms.biz.entity.SysUserRole".
+2026-01-21 10:30:06.672  WARN 7 --- [           main] c.f.c.d.datascope.DataScopeSqlInjector   : class com.foxess.baas.upms.biz.entity.SysUserRole ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2026-01-21 10:30:07.696  WARN 7 --- [           main] c.b.m.core.metadata.TableInfoHelper      : Can not find table primary key in Class: "com.foxess.baas.upms.biz.entity.SysDeptManager".
+2026-01-21 10:30:07.697  WARN 7 --- [           main] c.f.c.d.datascope.DataScopeSqlInjector   : class com.foxess.baas.upms.biz.entity.SysDeptManager ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2026-01-21 10:30:07.825  WARN 7 --- [           main] c.b.m.core.metadata.TableInfoHelper      : Can not find table primary key in Class: "com.foxess.baas.upms.biz.entity.SysRoleStation".
+2026-01-21 10:30:07.826  WARN 7 --- [           main] c.f.c.d.datascope.DataScopeSqlInjector   : class com.foxess.baas.upms.biz.entity.SysRoleStation ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2026-01-21 10:30:08.012  WARN 7 --- [           main] c.b.m.core.metadata.TableInfoHelper      : Can not find table primary key in Class: "com.foxess.baas.upms.biz.entity.SysUserPost".
+2026-01-21 10:30:08.013  WARN 7 --- [           main] c.f.c.d.datascope.DataScopeSqlInjector   : class com.foxess.baas.upms.biz.entity.SysUserPost ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2026-01-21 10:30:08.380  WARN 7 --- [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'QQ' defined in URL [jar:file:/opt/foxess-baas-upms.jar!/BOOT-INF/classes!/com/foxess/baas/upms/biz/handler/TencentLoginHandler.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'sysUserServiceImpl' defined in URL [jar:file:/opt/foxess-baas-upms.jar!/BOOT-INF/classes!/com/foxess/baas/upms/biz/service/impl/SysUserServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 15; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.foxess.baas.oss.service.BizProjectFileService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2026-01-21 10:30:08.424  INFO 7 --- [           main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2026-01-21 10:30:08.440  INFO 7 --- [           main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2026-01-21 10:30:08.473  INFO 7 --- [           main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2026-01-21 10:30:08.563 ERROR 7 --- [           main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 15 of constructor in com.foxess.baas.upms.biz.service.impl.SysUserServiceImpl required a bean of type 'com.foxess.baas.oss.service.BizProjectFileService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.foxess.baas.oss.service.BizProjectFileService' in your configuration.
+

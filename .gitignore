@@ -1,0 +1,33 @@
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+test/
+static/show
+data/
+.idea
+
+# Environment variables
+.env
+
+# Database
+chinook.db
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

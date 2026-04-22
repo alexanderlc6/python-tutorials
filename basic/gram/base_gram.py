@@ -295,3 +295,260 @@ print(list(d.values()))
 #     in2.pack()
 #     in3.pack()
 #     print(f"Input result:{in1},{in2},{in3}")
+
+# Recursive
+# Origin method
+def get_sum():
+    s = 0
+    for i in range(1, 101):
+        s += i;
+    print(s)
+get_sum()
+
+# Recursive method
+def get_sum_recursive(n):
+    if n == 1:
+        return 1
+    return n + get_sum_recursive(n - 1)
+print(get_sum_recursive(100))
+
+# Fibernacci  sequence
+# 1,1,2,3,5,8,13..., n = (n - 2) + (n - 1)
+def funa(n):
+    if n <= 1:
+        return n
+    return funa(n - 2) + funa(n - 1)
+print(funa(6))
+
+# Closure: function cascade definitions
+def outer():
+    n = 10
+    def inner():
+        print(n)
+    return inner
+
+# function memory address
+print(outer())
+
+outer()()
+ot = outer()
+ot()
+
+def outer(m):
+    n = 10
+    def inner(t):
+        print('Calc result:', m + n + t)
+    return inner
+print(outer(20))
+ot = outer(20)
+ot(50)
+
+def outer(m):
+    print('Outer() value:', m)
+    def inner(n):
+        print('Inner() value:', n)
+        return m + n
+    return inner
+ot = outer(10)
+print(ot)
+
+# Closure variable will reserve in memory
+print(ot(20))
+print(ot(40))
+
+# Decorator: define function ref param in a function
+# ====Origin method====
+def test(fn):
+    print('abc')
+    fn()
+
+def func():
+    print('test...')
+test(func)
+
+# Decorate function definition method
+# Function to be decorated
+def send():
+    print('Sending main msg...')
+def pay():
+    print('Paying...')
+
+# Decorator function
+def outer(fn):
+    def inner():
+        print(f'Login...')
+        fn()
+    return inner
+
+print(outer(send))
+outer(send)()
+# Or
+ot = outer(send)
+ot()
+ot = outer(pay)
+ot()
+
+def outer(fn):
+    def inner(name):
+        print(f'Login whth name:{name}...')
+        fn(name)
+    return inner
+
+# Grammar declaration method(Decorator reference, function to be decorated)
+@outer
+def send(name):
+    print('Sending other messages...')
+send('Alex')
+
+print(outer(send))
+ot = outer(send)
+ot('David')
+
+def var_func(*args, **kwargs):
+    print(args)
+    print(kwargs)
+var_func(name = 'Sally')
+
+def outer(fn):
+    def inner(*args, **kwargs):
+        print('Login...')
+        fn(*args, **kwargs)
+    return inner
+# print(outer('test'))
+# outer('test')()
+
+print(outer(var_func))
+outer(var_func)('Alex','Jack', name='Lisa', age = 19)
+
+# Multiple decorators
+def deco1(fn):
+    def inner():
+        return "hello " + fn() + " world"
+    return inner
+def deco2(fn):
+    def inner():
+        return "nice " + fn() + " great"
+    return inner
+
+@deco1
+@deco2
+def be_deco_func():
+    return "Being decorated here..."
+
+print(be_deco_func())
+
+# ======Iterable usage=======
+from collections.abc import Iterable
+print(isinstance('123', Iterable))
+li = [1,2,3,4,5]
+# iter() will call __iter()__ as result
+li2 = iter(li)
+print(next(li2))
+print(next(li2))
+print(next(li2))
+
+li2 = li.__iter__()
+# Contains __next()__
+print(dir(li2))
+print(li2.__next__())
+print(li2.__next__())
+print(li2.__next__())
+
+# ======Iterator usage=======
+from collections.abc import Iterator
+name = 'Alex Good'
+print(isinstance(name, Iterable))   #True
+# Iterable object may not be the Iterator object(should both support __next()__ and __iter()__ method).
+print(isinstance(name, Iterator))   #False
+
+name2 = iter(name)
+print(isinstance(name2, Iterable))   #True
+print(isinstance(name2, Iterator))   #True
+
+# Customize Iterator
+class MyTest(object):
+    def __init__(self):
+        self.num = 1
+    def funa(self):
+        print(self.num)
+        self.num += 1
+
+te = MyTest()
+print(te)
+# Increase by 1
+te.funa()
+te.funa()
+te.funa()
+te.funa()
+te.funa()
+
+for i in range(5):
+    te.funa()
+
+class MyIterator( object):
+    def __init__(self):
+        self.num = 0
+    def __iter__(self):
+        return self
+    def __next__(self):
+        if self.num == 10:
+            raise StopIteration('Stop iterate, data is empty!')
+        self.num += 1
+        return self.num
+
+mi = MyIterator()
+print(mi)
+print(next(mi))
+
+for i in mi:
+    print(i)
+
+# ======Generator usage=======
+for i in range(5):
+    print(i * 5)
+
+# print([i * 5 for i in range(5)])
+gen = (i * 5 for i in range(5))
+print(gen)
+print(next(gen))
+print(next(gen))
+print(next(gen))
+
+# Raw method
+# li = []
+# def test_gen():
+#     global li
+#     li.append('a')
+#     print('li:', li)
+# test_gen()
+# test_gen()
+
+# Generator method
+def gen():
+    print('Start gen...')
+    yield 'a'
+    yield 'b'
+    yield 'c'
+gen1 = gen()
+print(gen1)
+print(next(gen1))
+print(next(gen1))
+print(next(gen1))
+
+def gen2(n):
+    li =[]
+    # for i in range(n):
+    #     li.append(i)
+    a = 0
+    while a < n:
+        li.append(a)
+        yield a
+        a += 1
+    print('li:', li)
+gen2(4)
+
+for i in gen2(5):
+    print(i)
+
+
+
