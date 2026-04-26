@@ -101,18 +101,18 @@ from types import coroutine
 
 # greenlet, gevent, asyncio, yield, async/await
 # yield demo
-def func1():
-    yield 1
-    yield from func2()
-    yield 2
-
-def func2():
-    yield 3
-    yield 4
-
-f1 = func1()
-for item in f1:
-    print(item)
+# def func1():
+#     yield 1
+#     yield from func2()
+#     yield 2
+#
+# def func2():
+#     yield 3
+#     yield 4
+#
+# f1 = func1()
+# for item in f1:
+#     print(item)
 
 # asyncio demo
 import asyncio
@@ -138,17 +138,17 @@ import asyncio
 # loop.run_util_complete(asyncio.wait(tasks))
 
 # async/await demo
-async def func1():
-    print(1)
-    # Auto switch to other task in task coroutine list when I/O blocked or network request
-    await asyncio.sleep(2)
-    print(2)
-
-async def func2():
-    print(3)
-    # Auto switch to other task in task coroutine list when I/O blocked or network request
-    await asyncio.sleep(2)
-    print(4)
+# async def func1():
+#     print(1)
+#     # Auto switch to other task in task coroutine list when I/O blocked or network request
+#     await asyncio.sleep(2)
+#     print(2)
+#
+# async def func2():
+#     print(3)
+#     # Auto switch to other task in task coroutine list when I/O blocked or network request
+#     await asyncio.sleep(2)
+#     print(4)
 
 # =====Download operation demo=====
 # Normal mode - sync
@@ -168,6 +168,35 @@ async def func2():
 #     ]
 #     for item in url_list:
 #         download_image(item)
+
+import asyncio
+async def func1():
+    print(1)
+    await asyncio.sleep(2)
+    print(2)
+
+async def func2():
+    print(3)
+    await asyncio.sleep(2)
+    print(4)
+
+# Deprecated:
+# tasks = [
+#     asyncio.ensure_future(func1()),
+#     asyncio.ensure_future(func2())
+# ]
+#
+# print('=====Simple tasks=====')
+# loop = asyncio.new_event_loop()
+# asyncio.set_event_loop(loop)
+# loop.run_until_complete(asyncio.wait(tasks))
+# loop.close()
+
+# Recommend:
+async def together():
+    await asyncio.gather(func1(), func2())
+
+asyncio.run(together())
 
 # Coroutine mode - async
 import aiohttp
@@ -248,6 +277,7 @@ async def main():
     # res2 = await task2
     done, pending = await asyncio.wait(tasks, timeout=None)
     print(done)
+    print(pending)
 
 asyncio.run(main())
 
