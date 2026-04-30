@@ -127,3 +127,55 @@ pool = ThreadPoolExecutor(max_workers=5)
 for i in range(10):
     fut = pool.submit(func, i)
     print(fut)
+
+
+# ========Async Iterator===========
+class Reader(object):
+    def __init__(self):
+        self.count = 0
+
+    async def readline(self):
+        # await asyncio.sleep(1)
+        self.count += 1
+        if self.count == 100:
+            return None
+
+        return self.count
+
+    def __aiter__(self):
+        return self
+
+    async def __anext__(self):
+        val = await self.readline()
+        if val == None:
+            raise StopAsyncIteration
+        return val
+
+async def func():
+    obj = Reader()
+    async for item in obj:
+        print(item)
+
+asyncio.run(func())
+
+# ======Async context manager ========
+class AsyncContextManager:
+    def __init__(self, conn):
+        self.conn = conn
+
+    async def do_sth(self):
+        return 123
+
+    async def __aenter__(self):
+        self.conn = await asyncio.sleep(1)
+        return self
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        await asyncio.sleep(1)
+
+async def func():
+    async with AsyncContextManager() as f:
+        result = await f.do_sth()
+        print(result)
+
+asyncio.run(func())
